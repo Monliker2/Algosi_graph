@@ -1,0 +1,3 @@
+/home/evgeny/CLionProjects/Algosi_graph/cmake-build-debug/CMakeFiles/Algosi_graph.dir
+/home/evgeny/CLionProjects/Algosi_graph/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/evgeny/CLionProjects/Algosi_graph/cmake-build-debug/CMakeFiles/rebuild_cache.dir
