@@ -1,11 +1,10 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
-#include <sstream>
 #include <stdexcept>
 #include <string>
-#include <map>
-#include <set>
+#include <algorithm>
+#include <functional>
 
 using namespace std;
 
@@ -59,44 +58,43 @@ class Graph {
         _vertices.clear();
         for (int i = 0; i < dim; ++i) {
             _vertices.emplace_back(i);
+            std::cout << "Инициализирована вершина: " << i << std::endl;
         }
     }
+
 
 public:
     Graph() = default;
 
-    void load(const string& filename) {
-        vector<vector<int>> data;
-        ifstream file(filename);
-
-        if (!file.is_open()) {
-            throw runtime_error("Не удалось открыть файл");
+    void load(const std::string& filename) {
+        std::ifstream file(filename);
+        if (!file) {
+            throw std::runtime_error("Не удалось открыть файл");
         }
 
         int dim;
         file >> dim;
-        file.ignore();
 
-        string line;
-        while (getline(file, line)) {
-            stringstream ss(line);
-            vector<int> row;
-            int x;
-            while (ss >> x) {
-                row.push_back(x);
-            }
-            data.push_back(row);
+        // Инициализация вершин
+        _vertices.clear();
+        for (int i = 0; i < dim; ++i) {
+            _vertices.push_back(Vertex(i));
+            std::cout << "Инициализирована вершина: " << i << std::endl;
         }
 
-        _initVertices(dim);
-        for (int i = 0; i < data.size(); ++i) {
-            for (int j = 0; j < data[i].size(); ++j) {
-                if (data[i][j] > 0) {
-                    addEdge(i, j, data[i][j]);
+        // Загрузка матрицы смежности
+        for (int i = 0; i < dim; ++i) {
+            for (int j = 0; j < dim; ++j) {
+                int edge_len;
+                file >> edge_len;
+                std::cout << "Матрица: [" << i << "][" << j << "] = " << edge_len << std::endl;
+                if (edge_len > 0 && i != j) {  // Пропускаем самоссылки и ребра с длиной 0
+                    addEdge(i, j, edge_len);
                 }
             }
         }
     }
+
 
     void addVertex(int index) {
         for (const auto& vertex : _vertices) {
@@ -107,19 +105,23 @@ public:
         _vertices.emplace_back(index);
     }
 
-    void addEdge(int v1, int v2, int edgeLen = 1) {
-        bool foundV1 = false, foundV2 = false;
 
+
+    void addEdge(int v1, int v2, int edge_len = 1) {
+        std::cout << "Пытаемся добавить ребро: (" << v1 << " -> " << v2 << ") длина: " << edge_len << std::endl;
+
+        bool foundV1 = false;
+        bool foundV2 = false;
         for (const auto& vertex : _vertices) {
             if (vertex.index() == v1) foundV1 = true;
             if (vertex.index() == v2) foundV2 = true;
         }
 
-        if (!(foundV1 && foundV2) || v1 == v2) {
-            throw runtime_error("Невозможная пара индексов вершин!");
+        if (!foundV1 || !foundV2 || v1 == v2) {
+            throw std::runtime_error("Невозможная пара индексов вершин!");
+        } else {
+            _edges.push_back(Edge(v1, v2, edge_len));
         }
-
-        _edges.emplace_back(v1, v2, edgeLen);
     }
 
     void deleteVertex(int index) {
