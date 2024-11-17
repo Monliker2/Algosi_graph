@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/Algosi_graph.dir/main.cpp.o -o Algosi_graph 
