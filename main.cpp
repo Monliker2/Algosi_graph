@@ -1,10 +1,13 @@
 #include <iostream>
 #include <vector>
 #include <map>
+#include <algorithm>
+
 
 using namespace std;
 
 class Graph {
+
 private:
     vector<vector<int>> matrix;
     vector<vector<int>> matrix_weight;
@@ -125,51 +128,53 @@ public:
             std::cout << "\n";
         }
     }
+    vector<vector<int>> getMatrix() const {
+        return matrix;
+    }
 };
 
-// Функция для поиска циклов в графе
-// void task(Graph& graph) {
-//     auto adjMatrix = graph.toAdjMatrix(); // Матрица смежности графа
-//     vector<T_PATH> cycles; // Список циклов
-//
-//     // Поиск в глубину для нахождения циклов
-//     function<void(T_PATH)> dfs = [&](T_PATH path) {
-//         int v = path.back();
-//         for (int i = 0; i < adjMatrix.size(); ++i) {
-//             if (adjMatrix[v][i]) {
-//                 if (i == path[0]) { // Найден цикл
-//                     cycles.push_back(path);
-//                     cycles.back().push_back(i);
-//                 } else if (find(path.begin(), path.end(), i) == path.end()) {
-//                     T_PATH newPath = path;
-//                     newPath.push_back(i);
-//                     dfs(newPath);
-//                 }
-//             }
-//         }
-//     };
-//
-//     // Запуск DFS с каждой вершины
-//     for (int i = 0; i < adjMatrix.size(); ++i) {
-//         dfs({i});
-//     }
-//
-//     // Вывод найденных циклов
-//     cout << "Количество циклов: " << cycles.size() << "\n";
-//     cout << "Варианты обхода образующие циклы:\n";
-//     for (const auto& cycle : cycles) {
-//         for (int v : cycle) {
-//             cout << v << " ";
-//         }
-//         cout << "\n";
-//     }
-// }
+void dfs(vector<int> path, Graph& graph, vector<vector<int>>& cycles){
+    auto matrix = graph.getMatrix();
+
+    int v = path.back();
+    for (int i = 0; i < matrix.size(); ++i) {
+        if (matrix[v][i]) {
+            if (i == path[0]) { // Найден цикл
+                cycles.push_back(path);
+                cycles.back().push_back(i);
+            } else if (find(path.begin(), path.end(), i) == path.end()) {
+                vector<int> newPath = path;
+                newPath.push_back(i);
+                dfs(newPath, graph, cycles);
+            }
+        }
+    }
+};
+
+void task(Graph& graph) {
+    vector<vector<int>> cycles;
+
+    auto matrix = graph.getMatrix();
+
+    for (int i = 0; i < matrix.size(); ++i) {
+        dfs({i}, graph, cycles);
+    }
+
+    cout << "Количество циклов: " << cycles.size() << "\n";
+    cout << "Варианты обхода образующие циклы:\n";
+    for (const auto& cycle : cycles) {
+        for (int v : cycle) {
+            cout << v << " ";
+        }
+        cout << "\n";
+    }
+}
 
 // Точка входа в программу
 int main() {
     Graph g;
 
-    g.ADD_V(0,0);
+    /*g.ADD_V(0,0);
     g.ADD_V(1,1);
     g.ADD_V(2,2);
     g.ADD_V(3,3);
@@ -181,10 +186,28 @@ int main() {
     g.ADD_E(1,4);
     g.ADD_E(2,4);
     g.ADD_E(3,4);
+    g.ADD_E(4,1);
 
-    g.print();
+    task(g);*/
 
-    g.DEL_V(0);
+    g.ADD_V(0,0);
+    g.ADD_V(1,1);
+    g.ADD_V(2,2);
+    g.ADD_V(3,3);
+    g.ADD_V(4,4);
+    g.ADD_V(5,5);
+    g.ADD_V(6,6);
 
-    g.print();
+    g.ADD_E(0,1);
+    g.ADD_E(0,3);
+    g.ADD_E(1,3);
+    g.ADD_E(2,0);
+    g.ADD_E(3,4);
+    g.ADD_E(3,5);
+    g.ADD_E(3,0);
+    g.ADD_E(4,1);
+    g.ADD_E(4,2);
+    g.ADD_E(5,0);
+
+    task(g);
 }
