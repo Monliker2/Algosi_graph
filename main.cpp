@@ -1,265 +1,190 @@
 #include <iostream>
 #include <vector>
-#include <fstream>
-#include <stdexcept>
-#include <string>
-#include <algorithm>
-#include <functional>
+#include <map>
 
 using namespace std;
 
-// Определяем типы для матрицы смежности и пути
-using T_ADJ_MATRIX = vector<vector<int>>;
-using T_PATH = vector<int>;
-
-// Класс для представления вершины графа
-class Vertex {
-    int _index; // Индекс вершины
-
-public:
-    // Конструктор для инициализации вершины
-    explicit Vertex(int index) : _index(index) {}
-
-    // Метод для получения индекса вершины
-    int index() const {
-        return _index;
-    }
-
-    // Оператор вывода для отображения информации о вершине
-    friend ostream& operator<<(ostream& os, const Vertex& vertex) {
-        os << "Vertex[i: " << vertex._index << "]";
-        return os;
-    }
-};
-
-// Класс для представления ребра графа
-class Edge {
-    pair<int, int> _vertices; // Пара вершин (начало и конец ребра)
-    int len; // Длина ребра
-
-public:
-    // Конструктор для инициализации ребра
-    Edge(int v1 = -1, int v2 = -1, int length = 1)
-        : _vertices(v1, v2), len(length) {}
-
-    // Метод для получения пар вершин
-    pair<int, int> vertices() const {
-        return _vertices;
-    }
-
-    // Метод для получения длины ребра
-    int length() const {
-        return len;
-    }
-
-    // Оператор вывода для отображения информации о ребре
-    friend ostream& operator<<(ostream& os, const Edge& edge) {
-        os << "Edge[" << edge._vertices.first << " -> "
-           << edge._vertices.second << ", " << edge.len << "]";
-        return os;
-    }
-};
-
-// Класс для представления графа
 class Graph {
-    vector<Vertex> _vertices; // Список вершин
-    vector<Edge> _edges;      // Список ребер
+private:
+    vector<vector<int>> matrix;
+    vector<vector<int>> matrix_weight;
 
-    // Инициализация вершин
-    void _initVertices(int dim) {
-        _vertices.clear();
-        for (int i = 0; i < dim; ++i) {
-            _vertices.emplace_back(i);
-            std::cout << "Инициализирована вершина: " << i << std::endl;
-        }
-    }
+    map<int, int> _vertices;
 
 public:
-    Graph() = default; // Конструктор по умолчанию
+    Graph() = default;
+    void ADD_V(int v, int mark = 0) {
+        _vertices[v] = mark;
 
-    // Загрузка графа из файла
-    void load(const std::string& filename) {
-        std::ifstream file(filename);
-        if (!file) {
-            throw std::runtime_error("Не удалось открыть файл");
+        matrix.resize(_vertices.size());
+        for (auto& row : matrix) {
+            row.resize(_vertices.size(), 0);
         }
 
-        int dim; // Размер матрицы смежности
-        file >> dim;
+        matrix_weight.resize(_vertices.size());
+        for (auto& row : matrix_weight) {
+            row.resize(_vertices.size(), 0);
+        }
+    }
 
-        // Инициализация вершин
-        _vertices.clear();
-        for (int i = 0; i < dim; ++i) {
-            _vertices.push_back(Vertex(i));
-            std::cout << "Инициализирована вершина: " << i << std::endl;
+    void ADD_E(int start, int end, int weight = 1) {
+        //if(_vertices.find(start) != _vertices.end()) {
+        //    ADD_V(start);
+        //}
+        if (start >= matrix.size() || end >= matrix.size()) {
+            throw std::out_of_range("Invalid vertex index in ADD_E");
         }
 
-        // Загрузка матрицы смежности
-        for (int i = 0; i < dim; ++i) {
-            for (int j = 0; j < dim; ++j) {
-                int edge_len;
-                file >> edge_len; // Считываем длину ребра
-                std::cout << "Матрица: [" << i << "][" << j << "] = " << edge_len << std::endl;
-                // Добавляем ребро, если его длина > 0 и это не самоссылка
-                if (edge_len > 0 && i != j) {
-                    addEdge(i, j, edge_len);
-                }
+        matrix[start][end] = 1;
+        matrix_weight[start][end] = weight;
+    }
+
+    void DEL_V(int v) {
+        _vertices.erase(v);
+
+        matrix.erase(matrix.begin() + v);
+        for (auto& row : matrix) {
+            row.erase(row.begin() + v);
+        }
+
+        matrix_weight.erase(matrix_weight.begin() + v);
+        for (auto& row : matrix_weight) {
+            row.erase(row.begin() + v);
+        }
+
+        map<int, int> updated_vertices;
+        for (const auto& [key, value] : _vertices) {
+            updated_vertices[key > v ? key - 1 : key] = value;
+        }
+        _vertices = std::move(updated_vertices);
+    }
+
+
+    void DEL_E(int start, int end) {
+        matrix[start][end] = 0;
+        matrix_weight[start][end] = 0;
+    }
+
+    void EDIT_V(int v, int mark){
+        _vertices[v] = mark;
+    }
+
+    void EDIT_E(int start, int end, int weight) {
+        matrix_weight[start][end] = weight;
+    }
+
+    int FIRST(int v) {
+        for (int i = 0; i < matrix[v].size(); ++i) {
+            if (matrix[v][i] == 1) {
+                return i;
             }
         }
+        return -1;
     }
 
-    // Добавление вершины
-    void addVertex(int index) {
-        for (const auto& vertex : _vertices) {
-            if (vertex.index() == index) {
-                throw runtime_error("Вершина с таким индексом уже существует!");
+    int NEXT(int v, int i) {
+        for (int j = i + 1; j < matrix[v].size(); ++j) {
+            if (matrix[v][j] == 1) {
+                return j;
             }
         }
-        _vertices.emplace_back(index);
+        return -1;
     }
 
-    // Добавление ребра
-    void addEdge(int v1, int v2, int edge_len = 1) {
-        std::cout << "Пытаемся добавить ребро: (" << v1 << " -> " << v2 << ") длина: " << edge_len << std::endl;
-
-        bool foundV1 = false;
-        bool foundV2 = false;
-        // Проверяем существование вершин
-        for (const auto& vertex : _vertices) {
-            if (vertex.index() == v1) foundV1 = true;
-            if (vertex.index() == v2) foundV2 = true;
-        }
-
-        // Если вершины не найдены или ребро - петля, выбрасываем исключение
-        if (!foundV1 || !foundV2 || v1 == v2) {
-            throw std::runtime_error("Невозможная пара индексов вершин!");
-        } else {
-            _edges.push_back(Edge(v1, v2, edge_len)); // Добавляем ребро
-        }
-    }
-
-    // Удаление вершины
-    void deleteVertex(int index) {
-        // Находим вершину по индексу
-        auto it = find_if(_vertices.begin(), _vertices.end(),
-                          [index](const Vertex& v) { return v.index() == index; });
-
-        if (it == _vertices.end()) {
-            throw runtime_error("Вершина с таким индексом не существует!");
-        }
-
-        // Удаляем вершину
-        _vertices.erase(it);
-
-        // Удаляем связанные с вершиной ребра
-        _edges.erase(remove_if(_edges.begin(), _edges.end(),
-                               [index](const Edge& e) {
-                                   return e.vertices().first == index ||
-                                          e.vertices().second == index;
-                               }),
-                     _edges.end());
-    }
-
-    // Удаление ребра
-    void deleteEdge(int v1, int v2) {
-        // Находим ребро
-        auto it = find_if(_edges.begin(), _edges.end(),
-                          [v1, v2](const Edge& e) {
-                              return e.vertices() == make_pair(v1, v2);
-                          });
-
-        if (it == _edges.end()) {
-            throw runtime_error("Ребра с таким набором вершин не существует!");
-        }
-
-        // Удаляем ребро
-        _edges.erase(it);
-    }
-
-    // Создание матрицы смежности
-    T_ADJ_MATRIX toAdjMatrix() const {
-        T_ADJ_MATRIX adjMatrix(_vertices.size(), vector<int>(_vertices.size(), 0));
-        for (const auto& edge : _edges) {
-            adjMatrix[edge.vertices().first][edge.vertices().second] = edge.length();
-        }
-        return adjMatrix;
-    }
-
-    // Печать графа
-    void print() const {
-        cout << "Vertices:\n";
-        for (const auto& vertex : _vertices) {
-            cout << vertex << "\n";
-        }
-
-        cout << "Edges:\n";
-        for (const auto& edge : _edges) {
-            cout << edge << "\n";
-        }
-
-        cout << "Adjacency Matrix:\n";
-        for (const auto& row : toAdjMatrix()) {
-            for (int val : row) {
-                cout << val << " ";
+    int VERTEX(int v, int i) {
+        for (int j = 0; j < matrix[v].size(); ++j) {
+            if (matrix[v][j] == 1 && i == 0) {
+                return j;
             }
-            cout << "\n";
+            else if (matrix[v][j] == 1) i--;
+        }
+
+        return -1;
+    }
+    void print()  {
+        std::cout << "Vertices:\n";
+        for (const auto& [vertex, mark] : _vertices) {
+            std::cout << "Vertex " << vertex << " (Mark: " << mark << ")\n";
+        }
+
+        // Вывод матрицы смежности
+        std::cout << "\nAdjacency Matrix:\n";
+        for (const auto& row : matrix) {
+            for (int cell : row) {
+                std::cout << cell << " ";
+            }
+            std::cout << "\n";
+        }
+
+        // Вывод матрицы весов
+        std::cout << "\nWeight Matrix:\n";
+        for (const auto& row : matrix_weight) {
+            for (int weight : row) {
+                std::cout << weight << " ";
+            }
+            std::cout << "\n";
         }
     }
 };
 
 // Функция для поиска циклов в графе
-void task(Graph& graph) {
-    auto adjMatrix = graph.toAdjMatrix(); // Матрица смежности графа
-    vector<T_PATH> cycles; // Список циклов
-
-    // Поиск в глубину для нахождения циклов
-    function<void(T_PATH)> dfs = [&](T_PATH path) {
-        int v = path.back();
-        for (int i = 0; i < adjMatrix.size(); ++i) {
-            if (adjMatrix[v][i]) {
-                if (i == path[0]) { // Найден цикл
-                    cycles.push_back(path);
-                    cycles.back().push_back(i);
-                } else if (find(path.begin(), path.end(), i) == path.end()) {
-                    T_PATH newPath = path;
-                    newPath.push_back(i);
-                    dfs(newPath);
-                }
-            }
-        }
-    };
-
-    // Запуск DFS с каждой вершины
-    for (int i = 0; i < adjMatrix.size(); ++i) {
-        dfs({i});
-    }
-
-    // Вывод найденных циклов
-    cout << "Количество циклов: " << cycles.size() << "\n";
-    cout << "Варианты обхода образующие циклы:\n";
-    for (const auto& cycle : cycles) {
-        for (int v : cycle) {
-            cout << v << " ";
-        }
-        cout << "\n";
-    }
-}
+// void task(Graph& graph) {
+//     auto adjMatrix = graph.toAdjMatrix(); // Матрица смежности графа
+//     vector<T_PATH> cycles; // Список циклов
+//
+//     // Поиск в глубину для нахождения циклов
+//     function<void(T_PATH)> dfs = [&](T_PATH path) {
+//         int v = path.back();
+//         for (int i = 0; i < adjMatrix.size(); ++i) {
+//             if (adjMatrix[v][i]) {
+//                 if (i == path[0]) { // Найден цикл
+//                     cycles.push_back(path);
+//                     cycles.back().push_back(i);
+//                 } else if (find(path.begin(), path.end(), i) == path.end()) {
+//                     T_PATH newPath = path;
+//                     newPath.push_back(i);
+//                     dfs(newPath);
+//                 }
+//             }
+//         }
+//     };
+//
+//     // Запуск DFS с каждой вершины
+//     for (int i = 0; i < adjMatrix.size(); ++i) {
+//         dfs({i});
+//     }
+//
+//     // Вывод найденных циклов
+//     cout << "Количество циклов: " << cycles.size() << "\n";
+//     cout << "Варианты обхода образующие циклы:\n";
+//     for (const auto& cycle : cycles) {
+//         for (int v : cycle) {
+//             cout << v << " ";
+//         }
+//         cout << "\n";
+//     }
+// }
 
 // Точка входа в программу
-int main(int argc, char* argv[]) {
-    if (argc < 3) {
-        cerr << "Usage: " << argv[0] << " [PATH_TO_A_FILE_WITH_GRAPH] [MODE]\n";
-        return -1;
-    }
+int main() {
+    Graph g;
 
-    string filename = argv[1]; // Путь к файлу с графом
-    string mode = argv[2];     // Режим работы
+    g.ADD_V(0,0);
+    g.ADD_V(1,1);
+    g.ADD_V(2,2);
+    g.ADD_V(3,3);
+    g.ADD_V(4,4);
 
-    Graph graph;
-    try {
-        graph.load(filename); // Загрузка графа
-    } catch (const exception& e) {
-        cerr << e.what() << "\n";
-        return -1;
-    }
+    g.ADD_E(0,1);
+    g.ADD_E(0,2);
+    g.ADD_E(1,3);
+    g.ADD_E(1,4);
+    g.ADD_E(2,4);
+    g.ADD_E(3,4);
 
+    g.print();
+
+    g.DEL_V(0);
+
+    g.print();
+}
