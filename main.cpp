@@ -220,7 +220,7 @@ void task(Graph& graph) {
 
 int main(int argc, char* argv[]) {
     if (argc < 3) {
-        cerr << "Использование: " << argv[0] << " [ПУТЬ_ДО_ФАЙЛА_С_ГРАФОМ] [РЕЖИМ]\n";
+        cerr << "Usage: " << argv[0] << " [PATH_TO_A_FILE_WITH_GRAPH] [MODE]\n";
         return -1;
     }
 
