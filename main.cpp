@@ -6,7 +6,7 @@
 
 using namespace std;
 
-struct Vertie {
+struct Vertex {
     char name;
     int mark;
 };
@@ -17,7 +17,7 @@ private:
     vector<vector<int>> matrix;
     vector<vector<int>> matrix_weight;
 
-    map<int, Vertie> _vertices;
+    map<int, Vertex> _vertices;
 
 public:
     Graph() = default;
@@ -62,25 +62,25 @@ public:
     }
 
     void DEL_V(char v) {
-        int idx = indexOfName(v);
-        if (idx == -1) return;
+        int index = indexOfName(v);
+        if (index == -1) return;
 
-        _vertices.erase(idx);
+        _vertices.erase(index);
 
-        matrix.erase(matrix.begin() + idx);
+        matrix.erase(matrix.begin() + index);
         for (auto& row : matrix) {
-            row.erase(row.begin() + idx);
+            row.erase(row.begin() + index);
         }
 
-        matrix_weight.erase(matrix_weight.begin() + idx);
+        matrix_weight.erase(matrix_weight.begin() + index);
         for (auto& row : matrix_weight) {
-            row.erase(row.begin() + idx);
+            row.erase(row.begin() + index);
         }
 
-        std::map<int, Vertie> updated_vertices;
+        std::map<int, Vertex> updated_vertices;
 
         for (const auto& [key, value] : _vertices) {
-            int new_key = key > idx ? key - 1 : key;
+            int new_key = key > index ? key - 1 : key;
             updated_vertices[new_key] = value;
         }
         _vertices = std::move(updated_vertices);
