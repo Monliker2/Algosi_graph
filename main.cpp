@@ -77,13 +77,13 @@ public:
             row.erase(row.begin() + idx);
         }
 
-        /*std::map<int, Vertie> updated_vertices;
+        std::map<int, Vertie> updated_vertices;
 
         for (const auto& [key, value] : _vertices) {
             int new_key = key > idx ? key - 1 : key;
             updated_vertices[new_key] = value;
         }
-        _vertices = std::move(updated_vertices);*/
+        _vertices = std::move(updated_vertices);
     }
 
 
@@ -223,13 +223,24 @@ int main() {
 
 
 
-    g.ADD_V('a','a');
-    g.ADD_V('b','b');
-    g.ADD_V('c','c');
-    g.ADD_V('d','d');
-    g.ADD_V('e','e');
-    g.ADD_V('f','f');
-    g.ADD_V('j','j');
+    g.ADD_V('a',0);
+    g.ADD_V('b',0);
+    g.ADD_V('c',0);
+    g.ADD_V('d',0);
+    g.ADD_V('k',10);
+    g.ADD_V('e',0);
+    g.ADD_V('f',0);
+    g.ADD_V('j',0);
+
+    g.print();
+    g.DEL_V('k');
+    g.DEL_V('a');
+    g.DEL_V('b');
+
+    g.ADD_V('a',0);
+    g.ADD_V('b',0);
+
+    g.print();
 
     g.ADD_E('a','b');
     g.ADD_E('a','d');

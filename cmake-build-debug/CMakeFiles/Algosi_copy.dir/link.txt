@@ -1,1 +1,1 @@
-/usr/bin/c++ CMakeFiles/Algosi_copy.dir/main.cpp.o -o Algosi_copy
+/usr/bin/c++ -g CMakeFiles/Algosi_copy.dir/main.cpp.o -o Algosi_copy 
