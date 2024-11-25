@@ -1,8 +1,6 @@
 #include <iostream>
 #include <vector>
-#include <map>
 #include <algorithm>
-
 
 using namespace std;
 
@@ -79,13 +77,6 @@ public:
             row.erase(row.begin() + index);
         }
 
-        /*std::map<int, Vertex> updated_vertices;
-
-        for (const auto& [key, value] : _vertices) {
-            int new_key = key > index ? key - 1 : key;
-            updated_vertices[new_key] = value;
-        }
-        _vertices = std::move(updated_vertices);*/
     }
 
 
@@ -198,7 +189,7 @@ void task(Graph& graph) {
     cout << "Варианты обхода, образующие циклы:\n";
     for (const auto& cycle : cycles) {
         for (int v : cycle) {
-            cout << v << " ";
+            cout << graph.nameOfIndex(v) << " ";
         }
         cout << "\n";
     }
@@ -229,20 +220,9 @@ int main() {
     g.ADD_V('b',0);
     g.ADD_V('c',0);
     g.ADD_V('d',0);
-    g.ADD_V('k',10);
     g.ADD_V('e',0);
     g.ADD_V('f',0);
     g.ADD_V('j',0);
-
-    g.print();
-    g.DEL_V('k');
-    g.DEL_V('a');
-    g.DEL_V('b');
-
-    g.ADD_V('a',0);
-    g.ADD_V('b',0);
-
-    g.print();
 
     g.ADD_E('a','b');
     g.ADD_E('a','d');

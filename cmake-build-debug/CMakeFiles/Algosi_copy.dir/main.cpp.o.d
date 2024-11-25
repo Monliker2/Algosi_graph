@@ -151,14 +151,7 @@ CMakeFiles/Algosi_copy.dir/main.cpp.o: \
  /usr/include/c++/12/bits/stl_uninitialized.h \
  /usr/include/c++/12/bits/stl_vector.h \
  /usr/include/c++/12/bits/stl_bvector.h \
- /usr/include/c++/12/bits/vector.tcc /usr/include/c++/12/map \
- /usr/include/c++/12/bits/stl_tree.h \
- /usr/include/c++/12/ext/aligned_buffer.h \
- /usr/include/c++/12/bits/node_handle.h \
- /usr/include/c++/12/bits/stl_map.h /usr/include/c++/12/tuple \
- /usr/include/c++/12/bits/uses_allocator.h \
- /usr/include/c++/12/bits/stl_multimap.h \
- /usr/include/c++/12/bits/erase_if.h /usr/include/c++/12/algorithm \
+ /usr/include/c++/12/bits/vector.tcc /usr/include/c++/12/algorithm \
  /usr/include/c++/12/bits/stl_algo.h \
  /usr/include/c++/12/bits/algorithmfwd.h \
  /usr/include/c++/12/bits/stl_heap.h \

@@ -20,7 +20,6 @@ CMakeFiles/Algosi_copy.dir/main.cpp.o: /home/evgeny/Desktop/Algosi-copy/main.cpp
   /usr/include/c++/12/bits/cpp_type_traits.h \
   /usr/include/c++/12/bits/cxxabi_forced.h \
   /usr/include/c++/12/bits/cxxabi_init_exception.h \
-  /usr/include/c++/12/bits/erase_if.h \
   /usr/include/c++/12/bits/exception.h \
   /usr/include/c++/12/bits/exception_defines.h \
   /usr/include/c++/12/bits/exception_ptr.h \
@@ -39,7 +38,6 @@ CMakeFiles/Algosi_copy.dir/main.cpp.o: /home/evgeny/Desktop/Algosi-copy/main.cpp
   /usr/include/c++/12/bits/move.h \
   /usr/include/c++/12/bits/nested_exception.h \
   /usr/include/c++/12/bits/new_allocator.h \
-  /usr/include/c++/12/bits/node_handle.h \
   /usr/include/c++/12/bits/ostream.tcc \
   /usr/include/c++/12/bits/ostream_insert.h \
   /usr/include/c++/12/bits/postypes.h \
@@ -57,11 +55,8 @@ CMakeFiles/Algosi_copy.dir/main.cpp.o: /home/evgeny/Desktop/Algosi-copy/main.cpp
   /usr/include/c++/12/bits/stl_iterator.h \
   /usr/include/c++/12/bits/stl_iterator_base_funcs.h \
   /usr/include/c++/12/bits/stl_iterator_base_types.h \
-  /usr/include/c++/12/bits/stl_map.h \
-  /usr/include/c++/12/bits/stl_multimap.h \
   /usr/include/c++/12/bits/stl_pair.h \
   /usr/include/c++/12/bits/stl_tempbuf.h \
-  /usr/include/c++/12/bits/stl_tree.h \
   /usr/include/c++/12/bits/stl_uninitialized.h \
   /usr/include/c++/12/bits/stl_vector.h \
   /usr/include/c++/12/bits/streambuf.tcc \
@@ -69,7 +64,6 @@ CMakeFiles/Algosi_copy.dir/main.cpp.o: /home/evgeny/Desktop/Algosi-copy/main.cpp
   /usr/include/c++/12/bits/string_view.tcc \
   /usr/include/c++/12/bits/stringfwd.h \
   /usr/include/c++/12/bits/uniform_int_dist.h \
-  /usr/include/c++/12/bits/uses_allocator.h \
   /usr/include/c++/12/bits/utility.h \
   /usr/include/c++/12/bits/vector.tcc \
   /usr/include/c++/12/cctype \
@@ -83,7 +77,6 @@ CMakeFiles/Algosi_copy.dir/main.cpp.o: /home/evgeny/Desktop/Algosi-copy/main.cpp
   /usr/include/c++/12/debug/assertions.h \
   /usr/include/c++/12/debug/debug.h \
   /usr/include/c++/12/exception \
-  /usr/include/c++/12/ext/aligned_buffer.h \
   /usr/include/c++/12/ext/alloc_traits.h \
   /usr/include/c++/12/ext/atomicity.h \
   /usr/include/c++/12/ext/numeric_traits.h \
@@ -94,7 +87,6 @@ CMakeFiles/Algosi_copy.dir/main.cpp.o: /home/evgeny/Desktop/Algosi-copy/main.cpp
   /usr/include/c++/12/iosfwd \
   /usr/include/c++/12/iostream \
   /usr/include/c++/12/istream \
-  /usr/include/c++/12/map \
   /usr/include/c++/12/new \
   /usr/include/c++/12/ostream \
   /usr/include/c++/12/pstl/execution_defs.h \
@@ -105,7 +97,6 @@ CMakeFiles/Algosi_copy.dir/main.cpp.o: /home/evgeny/Desktop/Algosi-copy/main.cpp
   /usr/include/c++/12/string \
   /usr/include/c++/12/string_view \
   /usr/include/c++/12/system_error \
-  /usr/include/c++/12/tuple \
   /usr/include/c++/12/type_traits \
   /usr/include/c++/12/typeinfo \
   /usr/include/c++/12/vector \
@@ -210,6 +201,8 @@ CMakeFiles/Algosi_copy.dir/main.cpp.o: /home/evgeny/Desktop/Algosi-copy/main.cpp
 
 /usr/include/x86_64-linux-gnu/sys/select.h:
 
+/usr/include/x86_64-linux-gnu/sys/cdefs.h:
+
 /usr/lib/gcc/x86_64-linux-gnu/12/include/stdarg.h:
 
 /usr/include/x86_64-linux-gnu/gnu/stubs.h:
@@ -240,19 +233,13 @@ CMakeFiles/Algosi_copy.dir/main.cpp.o: /home/evgeny/Desktop/Algosi-copy/main.cpp
 
 /usr/include/x86_64-linux-gnu/bits/types/wint_t.h:
 
-/usr/include/x86_64-linux-gnu/bits/types/struct_tm.h:
+/usr/include/c++/12/cwchar:
 
-/usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h:
+/usr/include/c++/12/exception:
 
-/usr/include/x86_64-linux-gnu/bits/types/struct___jmp_buf_tag.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h:
+/usr/include/c++/12/bits/locale_facets.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/clock_t.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/struct_sched_param.h:
-
-/usr/include/c++/12/cctype:
 
 /usr/include/c++/12/bits/stl_tempbuf.h:
 
@@ -263,8 +250,6 @@ CMakeFiles/Algosi_copy.dir/main.cpp.o: /home/evgeny/Desktop/Algosi-copy/main.cpp
 /usr/include/c++/12/bits/utility.h:
 
 /usr/include/c++/12/bits/stl_pair.h:
-
-/usr/include/c++/12/bits/stl_map.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/time_t.h:
 
@@ -280,8 +265,6 @@ CMakeFiles/Algosi_copy.dir/main.cpp.o: /home/evgeny/Desktop/Algosi-copy/main.cpp
 
 /usr/include/c++/12/bits/locale_classes.h:
 
-/usr/include/c++/12/ext/aligned_buffer.h:
-
 /usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h:
 
 /usr/include/c++/12/bits/stl_construct.h:
@@ -290,29 +273,25 @@ CMakeFiles/Algosi_copy.dir/main.cpp.o: /home/evgeny/Desktop/Algosi-copy/main.cpp
 
 /usr/include/c++/12/bits/hash_bytes.h:
 
-/usr/include/c++/12/bits/stl_tree.h:
+/usr/include/c++/12/bits/streambuf_iterator.h:
 
-/usr/include/c++/12/bits/memoryfwd.h:
+/usr/include/c++/12/bits/stl_algo.h:
 
-/usr/include/c++/12/ext/atomicity.h:
+/usr/include/c++/12/bits/range_access.h:
 
-/usr/include/x86_64-linux-gnu/c++/12/bits/error_constants.h:
+/usr/include/c++/12/clocale:
 
-/usr/include/x86_64-linux-gnu/bits/time64.h:
-
-/usr/include/c++/12/bits/locale_facets.h:
-
-/usr/include/c++/12/exception:
+/usr/include/c++/12/bits/refwrap.h:
 
 /usr/include/asm-generic/errno.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/sigset_t.h:
-
-/usr/include/c++/12/bits/predefined_ops.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/12/include/stddef.h:
 
 /usr/include/c++/12/bits/postypes.h:
+
+/usr/include/c++/12/debug/assertions.h:
+
+/usr/include/c++/12/bits/new_allocator.h:
 
 /usr/include/c++/12/bits/ostream_insert.h:
 
@@ -320,25 +299,13 @@ CMakeFiles/Algosi_copy.dir/main.cpp.o: /home/evgeny/Desktop/Algosi-copy/main.cpp
 
 /usr/include/c++/12/bits/ostream.tcc:
 
-/usr/include/c++/12/bits/streambuf_iterator.h:
+/usr/include/c++/12/ext/atomicity.h:
 
-/usr/include/c++/12/bits/stl_algo.h:
+/usr/include/c++/12/bits/memoryfwd.h:
 
-/usr/include/c++/12/bits/range_access.h:
+/usr/include/x86_64-linux-gnu/c++/12/bits/error_constants.h:
 
-/usr/include/x86_64-linux-gnu/sys/cdefs.h:
-
-/usr/include/c++/12/bits/node_handle.h:
-
-/usr/include/c++/12/bits/new_allocator.h:
-
-/usr/include/c++/12/debug/assertions.h:
-
-/usr/include/c++/12/ext/numeric_traits.h:
-
-/usr/include/c++/12/pstl/glue_algorithm_defs.h:
-
-/usr/include/pthread.h:
+/usr/include/x86_64-linux-gnu/bits/time64.h:
 
 /usr/include/x86_64-linux-gnu/sys/single_threaded.h:
 
@@ -362,9 +329,21 @@ CMakeFiles/Algosi_copy.dir/main.cpp.o: /home/evgeny/Desktop/Algosi-copy/main.cpp
 
 /usr/include/x86_64-linux-gnu/bits/time.h:
 
+/usr/include/c++/12/ext/numeric_traits.h:
+
+/usr/include/c++/12/pstl/glue_algorithm_defs.h:
+
+/usr/include/pthread.h:
+
 /home/evgeny/Desktop/Algosi-copy/main.cpp:
 
 /usr/include/c++/12/bits/functional_hash.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h:
+
+/usr/include/c++/12/cctype:
+
+/usr/include/x86_64-linux-gnu/bits/types/struct_sched_param.h:
 
 /usr/include/c++/12/bits/basic_ios.h:
 
@@ -390,17 +369,7 @@ CMakeFiles/Algosi_copy.dir/main.cpp.o: /home/evgeny/Desktop/Algosi-copy/main.cpp
 
 /usr/include/c++/12/ext/alloc_traits.h:
 
-/usr/include/c++/12/cwchar:
-
-/usr/include/c++/12/clocale:
-
-/usr/include/c++/12/bits/refwrap.h:
-
-/usr/include/c++/12/bits/erase_if.h:
-
 /usr/include/c++/12/bits/cpp_type_traits.h:
-
-/usr/include/c++/12/tuple:
 
 /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h:
 
@@ -409,6 +378,10 @@ CMakeFiles/Algosi_copy.dir/main.cpp.o: /home/evgeny/Desktop/Algosi-copy/main.cpp
 /usr/include/c++/12/bits/stl_function.h:
 
 /usr/include/c++/12/bits/cxxabi_forced.h:
+
+/usr/include/c++/12/debug/debug.h:
+
+/usr/include/x86_64-linux-gnu/bits/stdio_lim.h:
 
 /usr/include/c++/12/bits/istream.tcc:
 
@@ -442,8 +415,6 @@ CMakeFiles/Algosi_copy.dir/main.cpp.o: /home/evgeny/Desktop/Algosi-copy/main.cpp
 
 /usr/include/c++/12/bits/streambuf.tcc:
 
-/usr/include/c++/12/bits/stl_multimap.h:
-
 /usr/include/c++/12/backward/binders.h:
 
 /usr/include/c++/12/bits/locale_classes.tcc:
@@ -455,10 +426,6 @@ CMakeFiles/Algosi_copy.dir/main.cpp.o: /home/evgeny/Desktop/Algosi-copy/main.cpp
 /usr/include/c++/12/bits/charconv.h:
 
 /usr/include/c++/12/bits/move.h:
-
-/usr/include/x86_64-linux-gnu/bits/stdio_lim.h:
-
-/usr/include/c++/12/debug/debug.h:
 
 /usr/include/c++/12/ext/type_traits.h:
 
@@ -481,12 +448,6 @@ CMakeFiles/Algosi_copy.dir/main.cpp.o: /home/evgeny/Desktop/Algosi-copy/main.cpp
 /usr/include/c++/12/iostream:
 
 /usr/include/c++/12/istream:
-
-/usr/include/c++/12/map:
-
-/usr/include/c++/12/bits/nested_exception.h:
-
-/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:
 
 /usr/include/errno.h:
 
@@ -552,6 +513,10 @@ CMakeFiles/Algosi_copy.dir/main.cpp.o: /home/evgeny/Desktop/Algosi-copy/main.cpp
 
 /usr/include/stdio.h:
 
+/usr/include/c++/12/bits/predefined_ops.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/sigset_t.h:
+
 /usr/include/stdlib.h:
 
 /usr/include/time.h:
@@ -570,15 +535,17 @@ CMakeFiles/Algosi_copy.dir/main.cpp.o: /home/evgeny/Desktop/Algosi-copy/main.cpp
 
 /usr/include/x86_64-linux-gnu/bits/byteswap.h:
 
+/usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h:
+
 /usr/include/x86_64-linux-gnu/bits/floatn.h:
 
 /usr/include/x86_64-linux-gnu/bits/libc-header-start.h:
 
+/usr/include/x86_64-linux-gnu/bits/types/struct_tm.h:
+
 /usr/include/x86_64-linux-gnu/bits/floatn-common.h:
 
 /usr/include/x86_64-linux-gnu/bits/locale.h:
-
-/usr/include/c++/12/bits/uses_allocator.h:
 
 /usr/include/x86_64-linux-gnu/bits/long-double.h:
 
@@ -587,6 +554,10 @@ CMakeFiles/Algosi_copy.dir/main.cpp.o: /home/evgeny/Desktop/Algosi-copy/main.cpp
 /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h:
 
 /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h:
+
+/usr/include/c++/12/bits/nested_exception.h:
+
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:
 
 /usr/include/c++/12/ostream:
 
@@ -617,3 +588,5 @@ CMakeFiles/Algosi_copy.dir/main.cpp.o: /home/evgeny/Desktop/Algosi-copy/main.cpp
 /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/error_t.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/struct___jmp_buf_tag.h:
