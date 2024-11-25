@@ -17,15 +17,15 @@ private:
     vector<vector<int>> matrix;
     vector<vector<int>> matrix_weight;
 
-    map<int, Vertex> _vertices;
+    vector<Vertex> _vertices;
 
 public:
     Graph() = default;
 
     int indexOfName(char c) {
-        for (const auto& [key, value] : _vertices) {
-            if (value.name == c) {
-                return key;
+        for (int i=0; i<=_vertices.size()-1;++i) {
+            if (_vertices[i].name == c) {
+                return i;
             }
         }
         return -1;
@@ -36,7 +36,9 @@ public:
     }
 
     void ADD_V(char v, int mark = 0) {
-        _vertices[_vertices.size()] = {v, mark};
+        _vertices.push_back({v,mark});
+
+
 
         matrix.resize(_vertices.size());
         for (auto& row : matrix) {
@@ -65,7 +67,7 @@ public:
         int index = indexOfName(v);
         if (index == -1) return;
 
-        _vertices.erase(index);
+        _vertices.erase(_vertices.begin() + index);
 
         matrix.erase(matrix.begin() + index);
         for (auto& row : matrix) {
@@ -77,13 +79,13 @@ public:
             row.erase(row.begin() + index);
         }
 
-        std::map<int, Vertex> updated_vertices;
+        /*std::map<int, Vertex> updated_vertices;
 
         for (const auto& [key, value] : _vertices) {
             int new_key = key > index ? key - 1 : key;
             updated_vertices[new_key] = value;
         }
-        _vertices = std::move(updated_vertices);
+        _vertices = std::move(updated_vertices);*/
     }
 
 
@@ -135,8 +137,8 @@ public:
     }
     void print()  {
         std::cout << "Vertices:\n";
-        for (const auto& [vertex, vertie] : _vertices) {
-            std::cout << "Vertex " << vertex << " (name: " << vertie.name << " mark: " << vertie.mark << ")\n";
+        for (int i=0; i<=_vertices.size()-1;++i) {
+            std::cout << "Vertex " << i << " (name: " << _vertices[i].name << ", mark: " << _vertices[i].mark << ")\n";
         }
 
         // Вывод матрицы смежности
